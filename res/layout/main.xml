@@ -81,10 +81,14 @@
 	    	android:text="Open Door"
 	    	/>
 	    
-	    <ProgressBar android:id="@+id/empty_spinner"
+	    <ProgressBar android:id="@+id/opening"
 	   		android:layout_width="wrap_content"
 	   		android:layout_height="wrap_content"
-	   		style="?android:attr/progressBarStyleSmallTitle"
+	   		
+	   		android:layout_gravity="center_horizontal"
+	   		android:layout_marginTop="40dp"
+	   		
+	   		style="?android:attr/progressBarStyleLarge"
 	   		
 	   		android:visibility="invisible"
 	   		/>

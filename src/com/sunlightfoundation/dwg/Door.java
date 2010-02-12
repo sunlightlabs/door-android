@@ -24,7 +24,7 @@ public class Door {
 		int code = response.getStatusLine().getStatusCode();
 		switch (code) {
 		case 200:
-			return responseBody(response);
+			return responseBody(response).trim();
 		case 403:
 			throw new DoorException("Invalid PIN, or your device has not been granted access.");
 		case 500:
