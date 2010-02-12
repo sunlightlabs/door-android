@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/widget_button"
+    android:layout_width="74dp"
+    android:layout_height="74dp"
+    android:orientation="vertical"
+    
+    
+    android:focusable="true"
+    android:background="@drawable/widget_background"
+    
+    android:layout_gravity="center"
+    android:gravity="center_horizontal|center_vertical"
+    >
+    
+    <LinearLayout 
+    	android:layout_width="48dp"
+    	android:layout_height="48dp"
+    	android:orientation="vertical"
+    	
+    	android:background="@drawable/icon"
+    	/>
+    
+</LinearLayout>
