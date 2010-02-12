@@ -3,47 +3,111 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    
-    android:padding="10dp"
     >
-    	
-    <TextView android:id="@+id/device_id"
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:layout_marginLeft="3dp"
-    	
-    	android:textSize="18sp"
-    	
-    	android:text="[device ID]"
-    	/>
-    	
-    <EditText android:id="@+id/pin"
+    
+    <LinearLayout android:orientation="horizontal"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-    	android:layout_marginTop="10dp"
+    	android:layout_weight="0"
+    	android:padding="12dp"
     	
-    	android:inputType="phone"
-    	android:password="true"
+    	android:background="#336699"
+    	android:gravity="center_vertical"
+    	>
     	
-    	android:hint="3-digit PIN"
+    	<ImageView 
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_marginLeft="5dp"
+    		android:layout_marginRight="24dp"
+    		
+    		android:src="@drawable/icon"
+    		/>
+    		
+    	<TextView
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		
+    		android:textColor="#ffffff"
+    		android:textSize="30sp"
+    		android:text="Sunlight 3000"
+    		/>
+    	
+    </LinearLayout>
+    
+    <View
+    	android:layout_width="fill_parent"
+    	android:layout_height="1dp"
+    	android:background="#dddddd"
+    	/>	
+    
+    <LinearLayout android:orientation="vertical"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_weight="1"
+    	
+    	android:background="#668899"
+    	
+    	android:paddingTop="20dp"
+    	android:paddingLeft="40dp"
+    	android:paddingRight="40dp"
+    	>
+    
+	    <TextView
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginTop="10dp"
+	    	
+	    	android:textColor="#ffffff"
+	    	android:textSize="16sp"
+	    	android:text="Enter your 3-digit PIN:"
+	    	/>
+	    	
+	    <EditText android:id="@+id/pin"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginTop="10dp"
+	    	
+	    	android:inputType="phone"
+	    	android:password="true"
+	    	/>
+	    
+	    <Button android:id="@+id/open_door"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginTop="20dp"
+	    	
+	    	android:textSize="20sp"
+	    	android:text="Open Door"
+	    	/>
+	    
+	    <ProgressBar android:id="@+id/empty_spinner"
+	   		android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		style="?android:attr/progressBarStyleSmallTitle"
+	   		
+	   		android:visibility="invisible"
+	   		/>
+    
+    </LinearLayout>
+    
+    <View
+    	android:layout_width="fill_parent"
+    	android:layout_height="1dp"
+    	android:background="#dddddd"
     	/>
     
-    <Button android:id="@+id/open_door"
+    <TextView android:id="@+id/device_id"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-    	android:layout_marginTop="10dp"
+    	android:layout_weight="0"
     	
-    	android:textSize="20sp"
-    	android:text="Open Door"
-    	/>
+    	android:padding="5dp"
+    	android:background="#555555"
     	
-    <Button android:id="@+id/clear_pin"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_marginTop="50dp"
-    	
-    	android:textSize="16sp"
-    	android:text="Clear PIN"
+    	android:textColor="#dddddd"
+    	android:textSize="14sp"
+    	android:text="Device ID:"
     	/>
     
 </LinearLayout>

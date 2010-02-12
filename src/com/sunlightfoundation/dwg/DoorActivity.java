@@ -3,6 +3,7 @@ package com.sunlightfoundation.dwg;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ public class DoorActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
         
         door = new DoorHelper(this);
@@ -41,13 +43,6 @@ public class DoorActivity extends Activity {
 				String pin = pinField.getText().toString();
 				if (!pin.equals(""))
 					door.open(pin);
-			}
-		});
-    	
-    	findViewById(R.id.clear_pin).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clearPin();
 			}
 		});
     }
