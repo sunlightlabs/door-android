@@ -6,7 +6,6 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class DoorActivity extends Activity {
 	private EditText pinField;
@@ -31,7 +30,7 @@ public class DoorActivity extends Activity {
     	
     	pinField = (EditText) findViewById(R.id.pin);
     	
-    	String savedPin = getPin();
+    	String savedPin = Utils.getPin(this);
     	if (savedPin != null && !savedPin.equals(""))
     		pinField.setText(savedPin);
     	
@@ -48,33 +47,27 @@ public class DoorActivity extends Activity {
     	findViewById(R.id.clear_pin).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				pinField.setText("");
-				savePin(null);
-				alert("PIN cleared from phone.");
+				clearPin();
 			}
 		});
+    }
+    
+    public void clearPin() {
+    	pinField.setText("");
+		Utils.savePin(this, null);
+		Utils.alert(this, "PIN cleared from phone.");
     }
     
     public void openDoor(String pin) {
     	try {
     		String url = getResources().getString(R.string.door_url);
     		String response = new Door(url).open(deviceId, pin);
-    		savePin(pin);
-			alert(response.trim());
-    	} catch(DoorException e) {
-			alert(e.getMessage());
+    		Utils.savePin(this, pin);
+			Utils.alert(this, response.trim());
+    	} catch(DoorException exception) {
+			Utils.alert(this, exception.getMessage());
 		}
     }
     
-    public void savePin(String pin) {
-		getSharedPreferences("sunlight-door", 0).edit().putString("pin", pin).commit();
-    }
     
-    public String getPin() {
-    	return getSharedPreferences("sunlight-door", 0).getString("pin", null);
-    }
-    
-    private void alert(String text) {
-    	Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
 }
