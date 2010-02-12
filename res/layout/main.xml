@@ -102,7 +102,9 @@
     	android:layout_height="wrap_content"
     	android:layout_weight="0"
     	
-    	android:padding="5dp"
+    	android:paddingTop="5dp"
+    	android:paddingLeft="12dp"
+    	android:paddingBottom="5dp"
     	android:background="#555555"
     	
     	android:textColor="#dddddd"
