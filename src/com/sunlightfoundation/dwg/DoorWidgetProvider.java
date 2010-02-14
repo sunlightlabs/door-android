@@ -15,13 +15,13 @@ public class DoorWidgetProvider extends AppWidgetProvider {
         final int length = appWidgetIds.length;
         for (int i=0; i<length; i++) {
             int appWidgetId = appWidgetIds[i];
-            RemoteViews views = buildView(context);
+            RemoteViews views = buildView(context, R.layout.widget);
             manager.updateAppWidget(appWidgetId, views);
         }
 	}
 	
-	public static RemoteViews buildView(Context context) {
-		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
+	public static RemoteViews buildView(Context context, int layout) {
+		RemoteViews views = new RemoteViews(context.getPackageName(), layout);
 		
 		Intent intent = new Intent(context, DoorService.class);
 		views.setOnClickPendingIntent(R.id.widget_button, PendingIntent.getService(context, 0, intent, 0));
