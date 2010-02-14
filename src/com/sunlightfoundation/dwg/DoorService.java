@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 public class DoorService extends Service {
 	
