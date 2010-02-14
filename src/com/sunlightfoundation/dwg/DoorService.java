@@ -10,15 +10,13 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 public class DoorService extends Service {
-	private DoorHelper door;
 	
 	@Override
 	public void onCreate() {
-		door = new DoorHelper(this);
-		String pin = door.getPin();
+		String pin = Utils.getPin(this);
 	    
 	    if (pin == null || pin.equals(""))
-	    	alert("No PIN stored, please open the door once from the main application before using the widget.");
+	    	Utils.alert(this, "No PIN stored, please open the door once from the main application before using the widget.");
 	    else
 	    	new OpenTask().execute(pin);
 	}
@@ -39,10 +37,6 @@ public class DoorService extends Service {
 		manager.updateAppWidget(widget, views);
 	}
 	
-	public void alert(String text) {
-    	Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
-	
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -59,12 +53,12 @@ public class DoorService extends Service {
     	@Override
     	protected String doInBackground(String... pin) {
     		try {
-    			String deviceId = door.deviceId();
+    			String deviceId = Utils.deviceId(DoorService.this);
     			if (deviceId == null || deviceId.equals(""))
     				throw new DoorException("No device ID - cannot open door.");
     			
-	    		String response = new Door(door.doorUrl()).open(deviceId, pin[0]);
-	    		door.savePin(pin[0]);
+	    		String response = new Door(Utils.doorUrl(DoorService.this)).open(deviceId, pin[0]);
+	    		Utils.savePin(DoorService.this, pin[0]);
 	    		return response;
     		} catch (DoorException exception) {
     			this.exception = exception;
@@ -77,9 +71,9 @@ public class DoorService extends Service {
     		hideSpinner();
     		
     		if (exception == null)
-    			alert(response);
+    			Utils.alert(DoorService.this, response);
     		else
-    			alert(exception.getMessage());
+    			Utils.alert(DoorService.this, exception.getMessage());
     		
     		stopSelf();
     	}

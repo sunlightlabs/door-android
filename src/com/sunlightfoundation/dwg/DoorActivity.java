@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class DoorActivity extends Activity {
 	private EditText pinField;
-	private DoorHelper door;
 	private OpenTask openTask;
 	
     @Override
@@ -19,8 +18,6 @@ public class DoorActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
-        
-        door = new DoorHelper(this);
         
         setupControls();
         
@@ -30,11 +27,11 @@ public class DoorActivity extends Activity {
     }
     
     public void onOpenDoor(String response) {
-    	alert(response);
+    	Utils.alert(this, response);
     }
     
     public void onOpenDoor(DoorException exception) {
-    	alert(exception.getMessage());
+    	Utils.alert(this, exception.getMessage());
     }
     
     public void openDoor(String pin) {
@@ -48,7 +45,7 @@ public class DoorActivity extends Activity {
     
     public void setupControls() {
     	TextView deviceView = (TextView) findViewById(R.id.device_id);
-    	String deviceId = door.deviceId();
+    	String deviceId = Utils.deviceId(this);
     	if (deviceId != null && !deviceId.equals(""))
     		deviceView.setText("Device ID: " + deviceId);
     	else
@@ -56,7 +53,7 @@ public class DoorActivity extends Activity {
     	
     	pinField = (EditText) findViewById(R.id.pin);
     	
-    	String savedPin = door.getPin();
+    	String savedPin = Utils.getPin(this);
     	if (savedPin != null && !savedPin.equals(""))
     		pinField.setText(savedPin);
     	
@@ -72,12 +69,8 @@ public class DoorActivity extends Activity {
     
     public void clearPin() {
     	pinField.setText("");
-		door.savePin(null);
-		alert("PIN cleared from phone.");
-    }
-    
-    public void alert(String text) {
-    	Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+		Utils.savePin(this, null);
+		Utils.alert(this, "PIN cleared from phone.");
     }
     
     public void showSpinner() {
@@ -93,12 +86,10 @@ public class DoorActivity extends Activity {
     private class OpenTask extends AsyncTask<String,Void,String> {
     	public DoorActivity context;
     	private DoorException exception;
-    	private DoorHelper door;
     	
     	public OpenTask(DoorActivity context) {
     		super();
     		this.context = context;
-    		this.door = new DoorHelper(context);
     	}
     	
     	@Override
@@ -108,19 +99,18 @@ public class DoorActivity extends Activity {
     	
     	public void onScreenLoad(DoorActivity context) {
     		this.context = context;
-    		this.door = new DoorHelper(this.context);
     		this.context.showSpinner();
     	}
     	
     	@Override
     	protected String doInBackground(String... pin) {
     		try {
-    			String deviceId = door.deviceId();
+    			String deviceId = Utils.deviceId(context);
     			if (deviceId == null || deviceId.equals(""))
     				throw new DoorException("No device ID - cannot open door.");
     			
-	    		String response = new Door(door.doorUrl()).open(deviceId, pin[0]);
-	    		door.savePin(pin[0]);
+	    		String response = new Door(Utils.doorUrl(context)).open(deviceId, pin[0]);
+	    		Utils.savePin(context, pin[0]);
 	    		return response;
     		} catch (DoorException exception) {
     			this.exception = exception;
