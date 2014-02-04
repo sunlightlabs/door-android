@@ -6,6 +6,8 @@
   android:minWidth="48dp"
   
   android:initialLayout="@layout/widget"
+  android:initialKeyguardLayout="@layout/widget"
+  android:widgetCategory="keyguard|home_screen"
   
   android:updatePeriodMillis="0"
   />
