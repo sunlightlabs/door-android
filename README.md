@@ -1,6 +1,6 @@
 ## Sunlight Foundation door opener
 
-Opens the door to the Sunlight office. Can be used from anywhere in the world to open the door.
+Opens the door to the Sunlight office. Can be used from anywhere in the world.
 
 
 ### Security
